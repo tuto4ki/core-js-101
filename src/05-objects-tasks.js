@@ -20,8 +20,12 @@
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-function Rectangle(/* width, height */) {
-  throw new Error('Not implemented');
+function Rectangle(width, height) {
+  return {
+    width,
+    height,
+    getArea() { return this.width * this.height; },
+  };
 }
 
 
@@ -35,8 +39,8 @@ function Rectangle(/* width, height */) {
  *    [1,2,3]   =>  '[1,2,3]'
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
-function getJSON(/* obj */) {
-  throw new Error('Not implemented');
+function getJSON(obj) {
+  return JSON.stringify(obj);
 }
 
 
@@ -51,8 +55,10 @@ function getJSON(/* obj */) {
  *    const r = fromJSON(Circle.prototype, '{"radius":10}');
  *
  */
-function fromJSON(/* proto, json */) {
-  throw new Error('Not implemented');
+function fromJSON(proto, json) {
+  const obj = JSON.parse(json);
+  Object.setPrototypeOf(obj, proto);
+  return obj;
 }
 
 
@@ -109,34 +115,76 @@ function fromJSON(/* proto, json */) {
  *
  *  For more examples see unit tests.
  */
+/* class SuperSelector {
+  element(value) {
+    this.value = value;
+    return value;
+  }
 
+  id(value) {
+    this.value = value;
+    return `#${value}`;
+  }
+
+  class(value) {
+    this.value = value;
+    return `.${value}`;
+  }
+
+  attr(value) {
+    this.value = value;
+    return `[${value}]`;
+  }
+
+  pseudoClass(value) {
+    this.value = value;
+    return `:${value}`;
+  }
+
+  pseudoElement(value) {
+    this.value = value;
+    return `::${value}`;
+  }
+
+  stringify() {
+    return this.value.toString();
+  }
+}
+*/
 const cssSelectorBuilder = {
   element(/* value */) {
     throw new Error('Not implemented');
+    // return new SuperSelector().element(value);
   },
 
   id(/* value */) {
     throw new Error('Not implemented');
+    // return new SuperSelector().id(value);
   },
 
   class(/* value */) {
     throw new Error('Not implemented');
+    // return new SuperSelector().class(value);
   },
 
   attr(/* value */) {
     throw new Error('Not implemented');
+    // return new SuperSelector().attr(value);
   },
 
   pseudoClass(/* value */) {
     throw new Error('Not implemented');
+    // return new SuperSelector().pseudoClass(value);
   },
 
   pseudoElement(/* value */) {
     throw new Error('Not implemented');
+    // return new SuperSelector().pseudoElement(value);
   },
 
   combine(/* selector1, combinator, selector2 */) {
     throw new Error('Not implemented');
+    // return new SuperSelector(`${selector1} ${combinator} ${selector2}`);
   },
 };
 
